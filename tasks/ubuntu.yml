@@ -7,11 +7,34 @@
   tags:
     - packages
 
-- name: Calcule des hash des fichiers de config.
-  import_tasks: hash.yml
+- name: Arrêt du service monit.
+  ansible.builtin.service:
+    name: monit
+    state: stopped
+    enabled: false
+  tags:
+    - config
 
-- name: Installation des profiles.
-  import_tasks: profiles.yml
+- name: Création du répertoire de surcharge pour monit.
+  ansible.builtin.file:
+    path: /usr/lib/systemd/system/monit.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  tags:
+    - config
+
+- name: Durcissement de monit.
+  ansible.builtin.template:
+    src: durcissemnt.j2
+    dest: /usr/lib/systemd/system/monit.service.d/durcissemnt.conf
+    backup: false
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+    - config
 
 - name: Copie du fichier de règle du pare-feu.
   ansible.builtin.template:
@@ -32,3 +55,10 @@
     immediate: true
   tags:
     - firewalld
+
+
+- name: Calcule des hash des fichiers de config.
+  import_tasks: hash.yml
+
+- name: Installation des profiles.
+  import_tasks: profiles.yml
