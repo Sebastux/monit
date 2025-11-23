@@ -1,0 +1,13 @@
+---
+- name: Informations sur la distribution.
+  ansible.builtin.debug:
+    msg:
+      - "Nom de la distribution              : {{ ansible_distribution }}."
+      - "Version majeure de la distribution  : {{ ansible_distribution_major_version }}."
+      - "Version mmineure de la distribution : {{ ansible_distribution_version }}."
+      - "Architecture                        : {{ ansible_machine }}."
+
+- name: Installation de monit sur Ubuntu.
+  ansible.builtin.import_tasks:
+    file: ubuntu.yml
+  when: ansible_distribution is search("Ubuntu")

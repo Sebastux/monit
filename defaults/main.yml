@@ -1,0 +1,22 @@
+---
+liste_packages: ['monit', 'lm-sensors', 'smartmontools', 'sysstat', 'rrdtool', 'iotop']
+
+# ************* Configuration de monit *************
+
+# Mot de passe du compte admin permettant l'accès à l'interface web
+cpte_admin: admintux
+
+# Mot de passe du compte utilisateur permettant l'accès à l'interface web
+cpte_utils: Utilisateur
+
+# Configuration du port d'écoute permettant l'accès à l'interface web.
+port_ecoute: 5962
+
+# Autoriser l'utilisation du compte invité en lecture seule. Les valeurs sont true ou false
+autorisation_guest: false
+
+# Autoriser l'accès en local. Les valeurs sont true ou false
+autorisation_localhost: false
+
+# Utiliser ou pas le ssl pour l'interface web. Valeur enable ou disable.
+ssl_enable: false
